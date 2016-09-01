@@ -5,6 +5,8 @@
     <title>Merchandise</title>
     <script type="text/javascript" src="page/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="page/js/index.js"></script>
+    <link rel="stylesheet" href="page/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="page/css/index.css" />
 </head>
 <body>
     <div id="catalog">
@@ -13,16 +15,19 @@
         <button id="add-new">Add New</button>
         <table id="list">
             <tr>
-                <td>Name<span></span></td>
-                <td class="count"><span></span></td>
-                <td>Price<span></span></td>
+                <td>Name<span class="glyphicon glyphicon-collapse-down rotate" aria-hidden="true" data-type="name" data-order></span></td>
+                <td class="count"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true" data-type="count" data-order></span></td>
+                <td>Price<span class="glyphicon glyphicon-collapse-down" aria-hidden="true" data-type="price" data-order></span></td>
                 <td>Actions</td>
             </tr>
         </table>
+        <div class="has-error">
         <input id="merch-name" /><label for="merch-name">Name:</label>
-        <input id="count" /><label for="count">Count:</label>
+        <input id="count" type="number" /><label for="count">Count:</label>
         <input id="price" /><label for="price">Price:</label>
-        <button id="add-update">Add/Update</button>
+        <button id="add-update">Add</button>
+        <div id="error"></div>
+        </div>
     </div>
 </body>
 </html>
