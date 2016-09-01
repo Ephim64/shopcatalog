@@ -1,0 +1,43 @@
+#catalog{
+  box-sizing: content-box;
+  width:70%;
+  float: center;
+  margin: 10% 10%;
+  border: 2px solid black;
+  box-shadow: 1px 1px 1px grey;
+}
+#add-new{
+  float: right;
+}
+#count{
+  width:5%;
+}
+#price{
+  width:10%;
+}
+.error{
+  color:red;
+}
+.form-control{
+  display: inline-block;
+  width:20%;
+}
+.row{
+  margin: 10px 10px;
+}
+table{
+  border: 1px solid black;
+  margin: 20px auto;
+}
+td{
+  text-align: center;
+}
+td > span{
+  float:right;
+}
+label{
+  display: inline-block;
+}
+input{
+  width:20%;
+}
