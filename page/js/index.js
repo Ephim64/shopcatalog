@@ -48,6 +48,7 @@ $(function(){
       action = false;
       $('#add-update').text('Update');
       $('.add-edit-modal').text('Edit item');
+      $("#filter").val()? filter($("#filter").val()): updateTable();
     }
     if($(this).attr('value') === 'delete'){
       $('#delete-modal-confirm').attr('data-index',$(this).attr('data-index'));
@@ -175,7 +176,7 @@ function toInput(item){
 function appendToTable(item){
   var row = '<tr data-index="'+merchandise.indexOf(item)+'">';
   row += '<td>'+item.name;
-  row += '<td class="badge">'+item.count;
+  row += '<td>'+item.count;
   row += '<td>'+toUS(item.price);
   row += '<td><button class="btn btn-sm btn-primary" value="edit" data-index="'+merchandise.indexOf(item)+'" data-toggle="modal" data-target="#add-edit-modal">Edit</button>';
   row += '<button class="btn btn-sm btn-danger" value="delete" data-index="'+merchandise.indexOf(item)+'"data-toggle="modal" data-target="#delete-modal">Delete</button>';

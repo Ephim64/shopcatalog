@@ -25,7 +25,7 @@
         <div id="add-edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labledby="add-edit-modal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <h3 class="modal-title add-edit-modal" id="add-edit-modal"></h3>
+                    <h3 class="modal-title add-edit-modal text-center" id="add-edit-modal"></h3>
                     <hr />
                     <div id="add-edit" class="modal-body">
                         <div class="input-wrapper">
@@ -41,10 +41,12 @@
                             <input id="price" class="form-control" />
                         </div>
                         <hr />
-                        <div id="error"></div>
+                        <div id="error text-center"></div>
                         <hr />
-                        <button id="add-update" class="btn btn-success" data-dismiss="modal">Add</button>
-                        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <div class="button-wrapper text-center">
+                          <button id="add-update" class="btn btn-success" data-dismiss="modal">Add</button>
+                          <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,11 +54,15 @@
         <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <h3 class="modal-title" id="delete-modal">Confirm</h3>
+                    <h3 class="modal-title text-center" id="delete-modal">Confirm</h3>
+                    <hr />
                     <div class="modal-body">
                         Are you willig to delete this position?
-                        <button id="delete-modal-confirm" class="btn btn-success" data-dismiss="modal">Yes</button>
-                        <button class="btn btn-default" data-dismiss="modal">No</button>
+                        <div class="button-wrapper text-center">
+                          <hr />
+                          <button id="delete-modal-confirm" class="btn btn-success" data-dismiss="modal">Yes</button>
+                          <button class="btn btn-default" data-dismiss="modal">No</button>
+                        </div>
                     </div>
                 </div>
             </div>
