@@ -4,29 +4,62 @@
     <meta charset="utf-8" />
     <title>Merchandise</title>
     <script type="text/javascript" src="page/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="page/js/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="page/js/index.js"></script>
     <link rel="stylesheet" href="page/css/bootstrap.min.css" />
     <link rel="stylesheet" href="page/css/index.css" />
 </head>
 <body>
     <div id="catalog">
-        <input id="filter" placeholder="Фильтр по подстроке в имени товара" />
-        <button id="apply-filter">Search</button>
-        <button id="add-new">Add New</button>
-        <table id="list">
-            <tr>
-                <td>Name<span class="glyphicon glyphicon-collapse-down rotate" aria-hidden="true" data-type="name" data-order></span></td>
-                <td class="count"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true" data-type="count" data-order></span></td>
-                <td>Price<span class="glyphicon glyphicon-collapse-down" aria-hidden="true" data-type="price" data-order></span></td>
+            <input id="filter" class="form-control" placeholder="Фильтр по подстроке в имени товара" />
+            <button id="apply-filter" class="btn btn-default">Search</button>
+        <button id="add-new" class="btn btn-success" data-toggle="modal" data-target="#add-edit-modal">Add New</button>
+        <table id="list" class="table table-bordered">
+            <tr class="merch-table-header">
+                <td>Name<span class="order glyphicon glyphicon-chevron-down rotate" aria-hidden="true" data-type="name" data-order></span></td>
+                <td class="count"><span class="order glyphicon glyphicon-chevron-down" aria-hidden="true" data-type="count" data-order></span></td>
+                <td>Price<span class="order glyphicon glyphicon-chevron-down" aria-hidden="true" data-type="price" data-order></span></td>
                 <td>Actions</td>
             </tr>
         </table>
-        <div class="has-error">
-        <input id="merch-name" /><label for="merch-name">Name:</label>
-        <input id="count" type="number" /><label for="count">Count:</label>
-        <input id="price" /><label for="price">Price:</label>
-        <button id="add-update">Add</button>
-        <div id="error"></div>
+        <div id="add-edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labledby="add-edit-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <h3 class="modal-title add-edit-modal" id="add-edit-modal"></h3>
+                    <hr />
+                    <div id="add-edit" class="modal-body">
+                        <div class="input-wrapper">
+                            <label for="merch-name">Name:</label>
+                            <input id="merch-name" class="form-control" />
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="count">Count:</label>
+                            <input id="count" class="form-control" type="number" />
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="price">Price:</label>
+                            <input id="price" class="form-control" />
+                        </div>
+                        <hr />
+                        <div id="error"></div>
+                        <hr />
+                        <button id="add-update" class="btn btn-success" data-dismiss="modal">Add</button>
+                        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <h3 class="modal-title" id="delete-modal">Confirm</h3>
+                    <div class="modal-body">
+                        Are you willig to delete this position?
+                        <button id="delete-modal-confirm" class="btn btn-success" data-dismiss="modal">Yes</button>
+                        <button class="btn btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
