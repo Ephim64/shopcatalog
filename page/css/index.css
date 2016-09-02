@@ -6,7 +6,7 @@
   padding:5px 5px;
   border: 1px solid #ddd;
   border-radius: 2px 2px;
-  box-shadow: 1px 1px 2px #a6a6a6, -1px -1px 2px #a6a6a6;
+  box-shadow: 1px 1px 3px #a6a6a6, -1px -1px 3px #a6a6a6;
   font-family: sans-serif;
   font-size: 13pt;
 }
@@ -20,6 +20,9 @@
 #error{
   color:#ff0000;
 }
+.badge{
+  margin: auto auto;
+}
 .error{
   color:#ff0000;
 }
@@ -29,6 +32,13 @@
 .form-control{
   display: inline-block;
   width:30%;
+}
+.modal-content{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left:0;
+  right:0;
 }
 .row{
   margin: 10px 10px;
@@ -49,10 +59,12 @@ td > span{
 td > button{
   margin: auto 10px;
 }
+tr:nth-child(2){
+  border-left: none;
+}
 label{
   float: left;
-  position: relative;
-  display: inline-block;
+  display: block;
   width:20%;
 }
 input{

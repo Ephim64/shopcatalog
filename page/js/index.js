@@ -11,10 +11,12 @@ $(function(){
     $('#add-update').text('Add');
     $('#price').removeAttr('data-price');
     $('.add-edit-modal').text('Add new item');
+    $('#merch-name').focus();
   })
   //Add or Update handler
   $('#add-update').click(function(event) {
     var item = {'name':$('#merch-name').val(),'count':$('#count').val(),'price':$('#price').attr('data-price')};
+    $('#merch-name').trigger('focusout');
     if(item.name && item.count && item.price && action){
     addItem(item);
     //appendToTable(item);
@@ -27,7 +29,7 @@ $(function(){
       $('tr[data-index="'+$(this).attr('data-index')+'"]').empty();
       updateItem($(this).attr('data-index'),item);
       toInput();
-      $('.order').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
+      $('.order').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
     }
   }
   $('#price').removeAttr('data-price');
@@ -40,7 +42,6 @@ $(function(){
   //Actions handler
   $('#list').on('click','button',function(){
     if($(this).attr('value') === 'edit'){
-      console.log('edit' + $(this).attr('data-index'));
       $('#price').attr('data-price', merchandise[$(this).attr('data-index')].price);
       toInput(merchandise[$(this).attr('data-index')]);
       $('#add-update').attr('data-index',$(this).attr('data-index'));
@@ -58,28 +59,27 @@ $(function(){
     updateTable(merchandise);
     toInput();
     $('#price').removeAttr('data-price');
+    $("#filter").val()? filter($("#filter").val()): updateTable();
   })
   //On focusout event handler for price input
   $('#price').focusout(function(event){
-    console.log('focusout');
     var tempPrice;
     var reg = /^([0-9.]+)$|^([0-9,]+)$/g;
     tempPrice = $('#price').val();
     var result = reg.test(tempPrice);
-    console.log(!result);
     if(tempPrice){
       if(!result){
         hasError(this,'Price can be numeric only!');
+        $('#price').removeAttr('data-price');
         return;
     }
     else removeError(this);
   }
-  else removeError(this);
+  else hasError(this,'Field can not be empty!');;
     tempPrice? $('#price').val(toUS(tempPrice)):$('#price').val('');
     $('#price').attr('data-price',tempPrice);
   })
   $('#price').focusin(function(event){
-    console.log('focus in');
     $('#price').attr('data-price')? $('#price').val($('#price').attr('data-price')):$('#price').val('');
   });
   var list = $('[class ~= order]');
@@ -89,7 +89,6 @@ $(function(){
   function assign(index){
     var count = counter();
     return $(list[index]).click(function(event){
-      console.log(this);
       if(count()%2){
         updateTable(order($(this).attr('data-type')));
         $(this).removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
@@ -113,29 +112,22 @@ $(function(){
       }
       else hasError(this,'The length of the field can not be greater than 15 symbols!')
     }
-    else removeError(this);
+    else hasError(this,'Name is blank!');
   })
 })
 //EVENT BINDING ENDS
 //DATA PROCESSING
 //Add new item to merchandise list
 function addItem(item){
-  console.log('add');
-  console.log(item.name);
-  console.log(item.count);
-  console.log($.isNumeric(item.price));
   merchandise.push(item);
 }
 //Updates item in merchandise list
 function updateItem(index,item){
-  console.log('update');
   merchandise[index] = item;
   appendToTable(item);
 }
 //Removes item from merchandise list
 function removeItem(index){
-  console.log('remove');
-  console.log(index);
   merchandise = merchandise.filter(function(element){
     return merchandise.indexOf(element) != index;
   });
@@ -181,10 +173,9 @@ function toInput(item){
 }
 //Appends item to table
 function appendToTable(item){
-  console.log(merchandise.indexOf(item));
   var row = '<tr data-index="'+merchandise.indexOf(item)+'">';
   row += '<td>'+item.name;
-  row += '<td>'+item.count;
+  row += '<td class="badge">'+item.count;
   row += '<td>'+toUS(item.price);
   row += '<td><button class="btn btn-sm btn-primary" value="edit" data-index="'+merchandise.indexOf(item)+'" data-toggle="modal" data-target="#add-edit-modal">Edit</button>';
   row += '<button class="btn btn-sm btn-danger" value="delete" data-index="'+merchandise.indexOf(item)+'"data-toggle="modal" data-target="#delete-modal">Delete</button>';
@@ -192,8 +183,6 @@ function appendToTable(item){
 }
 //Updates table with data from merchandise list
 function updateTable(list){
-  console.log('update table');
-  console.log(!list);
   $('.merch-table-header ~tr').empty();
   list = list?list:merchandise;
   if(list){
@@ -212,5 +201,6 @@ function hasError(object,error){
 function removeError(object){
   $(object).parent().removeClass('has-error')
   $('#error').text('');
+  $('#add-update').attr('disabled',false);
 }
 //END VISUAL OPERATIONS
