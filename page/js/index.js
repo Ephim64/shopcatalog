@@ -50,10 +50,6 @@ $(function(){
     }
     if($(this).attr('value') === 'delete'){
       $('#delete-modal-confirm').attr('data-index',$(this).attr('data-index'));
-      /*removeItem($(this).attr('data-index'));
-      updateTable(merchandise);
-      toInput();
-      $('#price').removeAttr('data-price');*/
     }
   });
   //Modal delete handler
@@ -85,42 +81,7 @@ $(function(){
   $('#price').focusin(function(event){
     console.log('focus in');
     $('#price').attr('data-price')? $('#price').val($('#price').attr('data-price')):$('#price').val('');
-  })
-  //Order handler
-  /*listOfGlyphs = $('[class ~= order]');
-  console.log(listOfGlyphs);
-  for(var i=0;i<list.length;i++){
-    var clickerCount;
-    assign(i);
-  }
-  console.log('i');
-  function assign(index){
-    clickerCount = makeCounter();
-    console.log(index);
-    $(listOfGlyphs[index]).click(function(event){
-        /*if(clickerCount()%2){//true = alph
-          updateTable(order($(this).attr('data-type')));
-          updateTable(order($(this).attr('data-type')).reverse());
-          $(this).removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-        }
-        else{
-          updateTable(order($(this).attr('data-type')).reverse());
-          $(this).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
-        }
-        console.log(clickerCount());
-    })
-  }
-  list.forEach(function(element){
-    console.log(element)
-    $(element).click(function(event){
-      var clickCounter = counter();
-      if(clickCounter%2){
-        updateTable(order($(this).attr('data-type')).reverse());
-        $(this).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-down');
-      }
-      else updateTable(order($(this).attr('data-type')));
-    })
-  })*/
+  });
   var list = $('[class ~= order]');
   for(var t=0;t<list.length;t++){
     assign(t);
@@ -139,19 +100,6 @@ $(function(){
       }
     })
   }
-
-  /*$('table').on('click','.glyphicon',function(event) {
-    if(count%2){//true = alphabetical/growing
-      updateTable(order($(this).attr('data-type')));
-      count++;
-      $(this).removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
-    }
-    else{
-      updateTable(order($(this).attr('data-type')).reverse());
-      count++;
-      $(this).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')
-    }
-  });*/
   $('#merch-name').on('focusout',function(event){
     var reg = /^\S.{0,15}$/g;
     var name = $('#merch-name').val();
@@ -223,13 +171,6 @@ function counter(){
     return ctr++;
   };
 }
-function makeCounter() {
-  var currentCount = 0;
-
-  return function() { // (**)
-    return currentCount++;
-  };
-}
 //END DATA PROCESSING
 //VISUAL OPERATIONS
 //Set inputs to value handed to it or empties them
@@ -254,23 +195,12 @@ function updateTable(list){
   console.log('update table');
   console.log(!list);
   $('.merch-table-header ~tr').empty();
-  //recreateTable();
   list = list?list:merchandise;
   if(list){
     list.forEach(function(item){
       appendToTable(item);
     })
   }
-}
-//Recreates table header row
-function recreateTable(){
-  var header = '<tr>';
-  header += '<td>Name<span class="glyphicon glyphicon-collapse-down" aria-hidden="true" data-type="name" data-order>';
-  header += '<td class="count"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true" data-type="count" data-order>'
-  header += '<td>Price<span class="glyphicon glyphicon-collapse-down" aria-hidden="true" data-type="price" data-order>';
-  header += '<td>Actions';
-  $('#list tbody').empty();
-  $('#list tbody').append(header);
 }
 //Sets an error status to inputs and show error message
 function hasError(object,error){
