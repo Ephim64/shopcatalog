@@ -19,10 +19,7 @@ $(function(){
     $('#merch-name').trigger('focusout');
     if(item.name && item.count && item.price && action){
     addItem(item);
-    //appendToTable(item);
-    toInput();
-    var test = !!$("#filter").val();
-    $("#filter").val()? filter($("#filter").val()): updateTable();
+    $("#filter").val()? updateTable(filter($("#filter").val())): updateTable();
   }
   else if(item.name && item.count && item.price && !action){
     if($(this).attr('data-index')) {
@@ -37,7 +34,7 @@ $(function(){
   //Applies search filter to merchandise list
   $('#apply-filter').click(function(event){
     var filterString = $('#filter').val();
-    filter(filterString);
+    updateTable(filter(filterString));
   })
   //Actions handler
   $('#list').on('click','button',function(){
@@ -48,7 +45,7 @@ $(function(){
       action = false;
       $('#add-update').text('Update');
       $('.add-edit-modal').text('Edit item');
-      $("#filter").val()? filter($("#filter").val()): updateTable();
+      $("#filter").val()? updateTable(filter($("#filter").val())): updateTable();
     }
     if($(this).attr('value') === 'delete'){
       $('#delete-modal-confirm').attr('data-index',$(this).attr('data-index'));
@@ -60,7 +57,7 @@ $(function(){
     updateTable(merchandise);
     toInput();
     $('#price').removeAttr('data-price');
-    $("#filter").val()? filter($("#filter").val()): updateTable();
+    $("#filter").val()? updateTable(filter($("#filter").val())): updateTable();
   })
   //On focusout event handler for price input
   $('#price').focusout(function(event){
@@ -91,11 +88,14 @@ $(function(){
     var count = counter();
     return $(list[index]).click(function(event){
       if(count()%2){
-        updateTable(order($(this).attr('data-type')));
+        $("#filter").val()? updateTable(order($(this).attr('data-type'), filter($("#filter").val()))): updateTable(order($(this).attr('data-type')));
+        //updateTable(order($(this).attr('data-type')));
         $(this).removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+
       }
       else{
-        updateTable(order($(this).attr('data-type')).reverse());
+        $("#filter").val()? updateTable(order($(this).attr('data-type'),filter($("#filter").val())).reverse()): updateTable(order($(this).attr('data-type')).reverse());
+        //updateTable(order($(this).attr('data-type')).reverse());
         $(this).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
       }
     })
@@ -134,8 +134,8 @@ function removeItem(index){
   });
 }
 //Orders list
-function order(parameter){
-  var orderedList = merchandise;
+function order(parameter, list){
+  var orderedList = list? list: merchandise;
   return orderedList.sort(function(a,b){
     if(a[parameter] > b[parameter]) return 1;
     if(a[parameter]<b[parameter]) return -1;
@@ -148,7 +148,7 @@ function filter(filterString){
     var filteredList = merchandise.filter(function(item){
       return item.name.toLowerCase().includes(filterString.toLowerCase());
     })
-    updateTable(filteredList);
+    return filteredList;
   }
   else updateTable(merchandise);
 }
